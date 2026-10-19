@@ -1,8 +1,9 @@
 .navbar {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
+  gap: 8px 24px;
   min-height: 80px;
   border-bottom: 1px solid var(--color-footer-border);
 }
@@ -28,6 +29,63 @@
   font-family: Georgia, serif;
   font-size: 20px;
   font-style: italic;
+}
+.navbar__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid var(--color-footer-border);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--color-text);
+  font-size: 14px;
+  font-weight: 500;
+}
+.navbar__toggle:hover,
+.navbar__toggle[aria-expanded="true"] {
+  border-color: #9eafa0;
+}
+.navbar__toggle[aria-expanded="true"] {
+  color: var(--color-cta);
+}
+.navbar__toggle:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+.navbar__toggle-icon {
+  position: relative;
+  display: block;
+  width: 16px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 1px;
+}
+.navbar__toggle-icon::before,
+.navbar__toggle-icon::after {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  width: 16px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 1px;
+}
+.navbar__toggle-icon::before {
+  top: -5px;
+}
+.navbar__toggle-icon::after {
+  top: 5px;
+}
+.navbar__toggle[aria-expanded="true"] .navbar__toggle-icon {
+  background: transparent;
+}
+.navbar__toggle[aria-expanded="true"] .navbar__toggle-icon::before {
+  transform: translateY(5px) rotate(45deg);
+}
+.navbar__toggle[aria-expanded="true"] .navbar__toggle-icon::after {
+  transform: translateY(-5px) rotate(-45deg);
 }
 .navbar__bar {
   display: flex;
@@ -57,11 +115,35 @@
   outline-offset: 4px;
   border-radius: 3px;
 }
-@media (width < 48rem) {
-  .navbar { align-items: flex-start; flex-direction: column; gap: 8px; padding-block: 20px 12px; }
-  .navbar__bar { gap: 4px 20px; }
+.navbar--compact {
+  min-height: 0;
+  gap: 8px 12px;
+  padding-block: 12px;
+}
+.navbar--compact .navbar__bar {
+  display: none;
+  flex-basis: 100%;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+  padding-block: 4px;
+  border-top: 1px solid var(--color-footer-border);
+}
+.navbar--compact .navbar__bar--open {
+  display: flex;
+}
+.navbar--compact .navbar__link {
+  width: 100%;
+  min-height: 48px;
 }
 @media (width < 25rem) {
-  .navbar__bar { gap: 0 16px; }
-  .navbar__link { font-size: 13px; }
+  .navbar__link {
+    font-size: 13px;
+  }
+}
+@media (forced-colors: active) {
+  .navbar--compact .navbar__bar,
+  .navbar__toggle {
+    border-color: CanvasText;
+  }
 }
